@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Muhammad Ali</title>
+    <meta name="description" content="Learn more about Muhammad Ali, a passionate front-end developer from Pakistan. Discover his journey, interests in gaming and crypto, and future aspirations.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'space-blue': '#0a0e27',
+                        'electric-cyan': '#00d4ff',
+                        'neon-purple': '#8b5cf6',
+                        'dark-gray': '#1a1a2e',
+                        'medium-gray': '#16213e'
+                    },
+                    fontFamily: {
+                        'orbitron': ['Orbitron', 'monospace'],
+                        'inter': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            overflow-x: hidden;
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #00d4ff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #8b5cf6);
+            transition: left 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            left: 0;
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+        
+        .form-input.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+        
+        .form-input.success {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .interest-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .interest-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hardware-showcase {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hardware-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .hardware-showcase:hover::before {
+            left: 100%;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+        
+        .email-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .email-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="font-inter text-white">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-space-blue/80 backdrop-blur-md border-b border-electric-cyan/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-orbitron text-xl font-bold gradient-text">
+                    <a href="index.html">Muhammad Ali</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-white hover:text-electric-cyan transition-colors">Home</a>
+                    <a href="projects.html" class="nav-link text-white hover:text-electric-cyan transition-colors">Projects</a>
+                    <a href="skills.html" class="nav-link text-white hover:text-electric-cyan transition-colors">Skills</a>
+                    <a href="about.html" class="nav-link text-electric-cyan font-semibold">About</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-electric-cyan">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-space-blue/95 backdrop-blur-md">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-white hover:text-electric-cyan transition-colors">Home</a>
+                <a href="projects.html" class="block px-3 py-2 text-white hover:text-electric-cyan transition-colors">Projects</a>
+                <a href="skills.html" class="block px-3 py-2 text-white hover:text-electric-cyan transition-colors">Skills</a>
+                <a href="about.html" class="block px-3 py-2 text-electric-cyan font-semibold">About</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Header Section -->
+    <section class="pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="font-orbitron text-4xl md:text-6xl font-bold mb-6 gradient-text">
+                About Me
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Get to know the person behind the code. Discover my journey, passions, and the story that drives my dedication to web development.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Personal Story -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="font-orbitron text-3xl font-bold mb-6 text-electric-cyan">My Journey</h2>
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <p>
+                            Hello! I'm Muhammad Ali, a passionate front-end developer from Pakistan with a deep love for creating 
+                            immersive web experiences. My journey into web development began during my F.Sc Pre-Medical studies, 
+                            where I discovered the fascinating world of coding and digital creation.
+                        </p>
+                        <p>
+                            Despite my medical background, I was drawn to the logical creativity of programming. I started with 
+                            basic HTML and CSS, gradually expanding my skills to include JavaScript, React, and modern web 
+                            development frameworks. Each project I build is a step toward mastering the art of creating 
+                            beautiful, functional, and user-friendly web applications.
+                        </p>
+                        <p>
+                            My goal is to become a full-stack developer and eventually start my own freelancing career, 
+                            using my skills to help businesses and individuals bring their digital visions to life. I'm 
+                            particularly interested in the intersection of web development and gaming, looking for ways 
+                            to incorporate gaming elements into web interfaces to create more engaging user experiences.
+                        </p>
+                    </div>
+                </div>
+                <div class="card-hover bg-dark-gray rounded-lg p-8 border border-medium-gray/30">
+                    <h3 class="font-orbitron text-2xl font-bold mb-6 gradient-text text-center">Quick Facts</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <span class="text-electric-cyan mr-3">🎮</span>
+                            <span>Gaming Enthusiast</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-neon-purple mr-3">💻</span>
+                            <span>Front-End Developer</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-electric-cyan mr-3">🎨</span>
+                            <span>Creative Problem Solver</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-neon-purple mr-3">📈</span>
+                            <span>Crypto Curious</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-electric-cyan mr-3">🚀</span>
+                            <span>Tech Explorer</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-neon-purple mr-3">📚</span>
+                            <span>Continuous Learner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interests -->
+    <section class="py-20 bg-dark-gray/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-12 gradient-text">
+                My Interests
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="interest-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30">
+                    <div class="text-4xl mb-4 text-center">🎮</div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4 text-electric-cyan text-center">Gaming</h3>
+                    <p class="text-gray-300 text-center">
+                        Passionate gamer with extensive knowledge across various gaming genres. 
+                        I love analyzing game mechanics, UI design, and immersive storytelling in modern games.
+                    </p>
+                </div>
+                
+                <div class="interest-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30">
+                    <div class="text-4xl mb-4 text-center">💰</div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4 text-neon-purple text-center">Cryptocurrency</h3>
+                    <p class="text-gray-300 text-center">
+                        Fascinated by blockchain technology and cryptocurrency markets. I follow BTC and Dogecoin, 
+                        learning about trading patterns and market analysis.
+                    </p>
+                </div>
+                
+                <div class="interest-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30">
+                    <div class="text-4xl mb-4 text-center">🖥️</div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4 text-electric-cyan text-center">Hardware</h3>
+                    <p class="text-gray-300 text-center">
+                        Tech enthusiast with custom gaming PC setup (i7 3rd gen, 4GB GPU) and ThinkPad i7 5th gen laptop. 
+                        Love exploring hardware capabilities.
+                    </p>
+                </div>
+                
+                <div class="interest-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30">
+                    <div class="text-4xl mb-4 text-center">🎨</div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4 text-neon-purple text-center">Content Creation</h3>
+                    <p class="text-gray-300 text-center">
+                        Skilled in Canva editing, CapCut video editing, and InShot mobile editing. 
+                        Creating visual content is another way I express my creativity.
+                    </p>
+                </div>
+                
+                <div class="interest-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30">
+                    <div class="text-4xl mb-4 text-center">🌐</div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4 text-electric-cyan text-center">Web Technologies</h3>
+                    <p class="text-gray-300 text-center">
+                        Always exploring new web technologies, frameworks, and development tools. 
+                        Keeping up with the latest trends in front-end development.
+                    </p>
+                </div>
+                
+                <div class="interest-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30">
+                    <div class="text-4xl mb-4 text-center">🚀</div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4 text-neon-purple text-center">Innovation</h3>
+                    <p class="text-gray-300 text-center">
+                        Passionate about AI integration, machine learning, and the future of technology. 
+                        Exploring TensorFlow.js and OpenAI API possibilities.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hardware Setup -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-12 gradient-text">
+                My Hardware Setup
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <div class="hardware-showcase card-hover bg-dark-gray rounded-lg p-8 border border-medium-gray/30">
+                    <h3 class="font-orbitron text-2xl font-bold mb-6 text-electric-cyan">Gaming PC</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Processor:</span>
+                            <span class="text-electric-cyan font-semibold">Intel i7 3rd Generation</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Graphics Card:</span>
+                            <span class="text-neon-purple font-semibold">4GB GPU</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Storage:</span>
+                            <span class="text-electric-cyan font-semibold">500GB HDD + 128GB SSD</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Power Supply:</span>
+                            <span class="text-neon-purple font-semibold">500W PSU</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-medium-gray/30 rounded-lg">
+                        <p class="text-sm text-gray-300">
+                            Custom built gaming rig optimized for both gaming performance and development workloads. 
+                            Perfect for testing games and running resource-intensive development tools.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="hardware-showcase card-hover bg-dark-gray rounded-lg p-8 border border-medium-gray/30">
+                    <h3 class="font-orbitron text-2xl font-bold mb-6 text-neon-purple">Development Laptop</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Model:</span>
+                            <span class="text-electric-cyan font-semibold">ThinkPad i7 5th Generation</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Usage:</span>
+                            <span class="text-neon-purple font-semibold">Primary Development Machine</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Portability:</span>
+                            <span class="text-electric-cyan font-semibold">Work & Travel</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Reliability:</span>
+                            <span class="text-neon-purple font-semibold">Business Grade</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-medium-gray/30 rounded-lg">
+                        <p class="text-sm text-gray-300">
+                            Reliable ThinkPad for coding on the go. Excellent keyboard for long coding sessions 
+                            and robust build quality for daily development work.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="py-20 bg-dark-gray/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-12 gradient-text">
+                Get In Touch
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <div>
+                    <h3 class="font-orbitron text-2xl font-bold mb-6 text-electric-cyan">Let's Connect</h3>
+                    <p class="text-gray-300 mb-8 leading-relaxed">
+                        I'm always interested in discussing new opportunities, interesting projects, 
+                        or just chatting about technology and gaming. Whether you're looking for a 
+                        developer collaboration or want to share ideas, I'd love to hear from you!
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <span class="text-electric-cyan mr-4">📧</span>
+                            <span class="text-gray-300">alikhan1475623@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-neon-purple mr-4">🌐</span>
+                            <span class="text-gray-300">Available for freelance projects</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-electric-cyan mr-4">🕒</span>
+                            <span class="text-gray-300">Response within 24 hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-orbitron text-lg font-bold mb-4 text-neon-purple">Connect on Social Media</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-electric-cyan transition-colors">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-electric-cyan transition-colors">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-electric-cyan transition-colors">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-dark-gray rounded-lg p-8 border border-medium-gray/30">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="form-input w-full px-4 py-3 bg-medium-gray border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none">
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="form-input w-full px-4 py-3 bg-medium-gray border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none">
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-semibold text-gray-300 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" required 
+                                   class="form-input w-full px-4 py-3 bg-medium-gray border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none">
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-semibold text-gray-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      class="form-input w-full px-4 py-3 bg-medium-gray border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none resize-none"></textarea>
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+                        
+                        <!-- Send Options -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <button type="button" onclick="sendToWhatsApp()" 
+                                    class="whatsapp-btn w-full px-4 py-3 rounded-lg font-semibold text-white flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                </svg>
+                                WhatsApp
+                            </button>
+                            
+                            <button type="button" onclick="sendToEmail()" 
+                                    class="email-btn w-full px-4 py-3 rounded-lg font-semibold text-white flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                                Email
+                            </button>
+                        </div>
+                        
+                        <div id="form-success" class="hidden text-center p-4 bg-green-500/20 border border-green-500 rounded-lg">
+                            <div class="text-green-400 font-semibold mb-1">Opening WhatsApp...</div>
+                            <div class="text-gray-300 text-sm">Redirecting you to send the message</div>
+                        </div>
+                        
+                        <div id="email-success" class="hidden text-center p-4 bg-blue-500/20 border border-blue-500 rounded-lg">
+                            <div class="text-blue-400 font-semibold mb-1">Opening Email Client...</div>
+                            <div class="text-gray-300 text-sm">Please send the email manually if it doesn't open</div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+      <!-- Footer -->
+<footer class="bg-space-blue border-t border-medium-gray/30 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <div class="font-orbitron text-xl font-bold gradient-text mb-4">
+                Muhammad Ali
+            </div>
+            <p class="text-gray-400 mb-4">
+                Front-End Developer & Gaming Enthusiast
+            </p>
+            <div class="flex justify-center space-x-6 mb-4">
+                <!-- X / Twitter -->
+                <a href="https://x.com/malikhan14756" class="text-gray-400 hover:text-electric-cyan transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                    </svg>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/m-ali-27954934b/" class="text-gray-400 hover:text-electric-cyan transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <!-- GitHub -->
+                <a href="https://github.com/alikhan14756" class="text-gray-400 hover:text-electric-cyan transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/m.ali.833155" class="text-gray-400 hover:text-electric-cyan transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22.675 0h-21.35C.596 0 0 .593 0 1.326v21.348C0 23.407.596 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.794.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.324-.593 1.324-1.326V1.326C24 .593 23.406 0 22.675 0z"/>
+                    </svg>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/alikhan1475623" class="text-gray-400 hover:text-electric-cyan transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.334 3.608 1.31.975.976 1.247 2.242 1.31 3.608.058 1.265.069 1.645.069 4.849s-.012 3.584-.07 4.849c-.062 1.366-.334 2.633-1.31 3.608-.976.975-2.242 1.247-3.608 1.31-1.265.058-1.645.069-4.849.069s-3.584-.012-4.849-.07c-1.366-.062-2.633-.334-3.608-1.31-.975-.976-1.247-2.242-1.31-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.334-2.633 1.31-3.608.976-.975 2.242-1.247 3.608-1.31C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.775.131 4.567.386 3.515 1.439c-1.053 1.053-1.308 2.261-1.367 3.538C2.013 6.668 2 7.077 2 10.337v3.326c0 3.26.013 3.669.072 4.949.059 1.277.314 2.485 1.367 3.538 1.052 1.053 2.26 1.308 3.538 1.367 1.28.059 1.689.072 4.949.072s3.669-.013 4.949-.072c1.277-.059 2.485-.314 3.538-1.367 1.053-1.052 1.308-2.26 1.367-3.538.059-1.28.072-1.689.072-4.949s-.013-3.669-.072-4.949c-.059-1.277-.314-2.485-1.367-3.538-1.052-1.053-2.26-1.308-3.538-1.367C15.669.013 15.26 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.881 0 1.44 1.44 0 012.881 0z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                © 2024 Muhammad Ali. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>
+    
+    <script>
+        // About page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMobileMenu();
+            initializeScrollAnimations();
+            initializeInterestCards();
+        });
+        
+        // WhatsApp Function - REPLACE THE NUMBER BELOW WITH YOUR WHATSAPP NUMBER
+        function sendToWhatsApp() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Validation
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields before sending.');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // IMPORTANT: Replace this with your actual WhatsApp number
+            // Format: Country code + number without + or spaces
+            // Example for Pakistan: 923001234567 (92 is Pakistan code)
+            const phoneNumber = "923055389967"; // ← CHANGE THIS TO YOUR NUMBER
+            
+            // Create formatted message
+            const text = `*New Message from Portfolio Website*%0A%0A` +
+                         `*Name:* ${name}%0A` +
+                         `*Email:* ${email}%0A` +
+                         `*Subject:* ${subject}%0A%0A` +
+                         `*Message:*%0A${message}%0A%0A` +
+                         `-------------------%0A` +
+                         `Sent from: Muhammad Ali Portfolio`;
+            
+            // Show success message
+            document.getElementById('form-success').classList.remove('hidden');
+            document.getElementById('email-success').classList.add('hidden');
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                document.getElementById('form-success').classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Email Function
+        function sendToEmail() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Validation
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields before sending.');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Create mailto link
+            const mailtoSubject = `Portfolio Contact: ${subject}`;
+            const mailtoBody = `Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+            const mailtoLink = `mailto:alikhan1475623@gmail.com?subject=${encodeURIComponent(mailtoSubject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            // Show success message
+            document.getElementById('email-success').classList.remove('hidden');
+            document.getElementById('form-success').classList.add('hidden');
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                document.getElementById('email-success').classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Email validation helper
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // Mobile menu functionality
+        function initializeMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn?.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // Scroll animations
+        function initializeScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            const animatedElements = document.querySelectorAll('.interest-card');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // Interest cards animation
+        function initializeInterestCards() {
+            const cards = document.querySelectorAll('.interest-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        }
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
