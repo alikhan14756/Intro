@@ -234,6 +234,180 @@
         .nav-link:hover::before {
             left: 0;
         }
+
+        
+         .whatsapp-sticky {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: auto;
+      height: auto;
+      cursor: pointer;
+      /* ensures smooth animations and no layout shifts */
+      display: block;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.15));
+      transition: transform 0.2s ease, filter 0.2s;
+    }
+
+    /* The actual clickable link/button element */
+    .wa-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 68px;
+      height: 68px;
+      background: #25D366;  /* WhatsApp brand green */
+      background: radial-gradient(circle at 30% 25%, #4cda6c, #1da859);
+      border-radius: 50%;   /* perfectly rounded shape */
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      /* Glow animation (pulse) – infinite */
+      animation: glowPulse 1.8s infinite ease-out;
+      /* Shake animation: runs every 1 second, but we set a repeating pattern with delay */
+      /* We'll create a separate shake keyframe that loops infinitely with step timing */
+      animation: 
+        glowPulse 2s infinite ease-out,
+        subtleShake 1s infinite ease-in-out;
+      transform-origin: center;
+      will-change: transform, box-shadow;
+    }
+
+    /* WhatsApp icon inside (SVG or Font Awesome? We'll use pure SVG for crispness & independence) */
+    .wa-icon {
+      width: 38px;
+      height: 38px;
+      display: block;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+      transition: transform 0.2s;
+    }
+
+    /* Hover effect: scale up slightly, more intense glow */
+    .wa-button:hover {
+      transform: scale(1.07);
+      animation: glowIntense 1.2s infinite ease-out, subtleShake 1s infinite ease-in-out;
+    }
+
+    /* Optional: active (click) feedback */
+    .wa-button:active {
+      transform: scale(0.96);
+      transition: transform 0.05s;
+    }
+
+    /* KEYFRAME ANIMATIONS */
+
+    /* Glow pulse effect: from soft outer glow to bright pulsation */
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5), 0 4px 12px rgba(0,0,0,0.2);
+      }
+      50% {
+        box-shadow: 0 0 0 12px rgba(37, 211, 102, 0.25), 0 6px 16px rgba(0,0,0,0.2);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 4px 12px rgba(0,0,0,0.2);
+      }
+    }
+
+    /* More intense glow for hover */
+    @keyframes glowIntense {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.8), 0 0 0 0 #fff3;
+      }
+      50% {
+        box-shadow: 0 0 0 16px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(255,255,200,0.3);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 0 0 0 rgba(255,255,200,0);
+      }
+    }
+
+    /* Shake animation: gentle rotation & tiny translation, runs every 1 second (infinite) */
+    /* We want the shake to happen after every second. Since it's infinite, the animation repeats each 1s.
+       The keyframes define the shaking motion within the 1s duration. */
+    @keyframes subtleShake {
+      0%, 100% {
+        transform: rotate(0deg) translateX(0);
+      }
+      10% {
+        transform: rotate(2deg) translateX(1px);
+      }
+      20% {
+        transform: rotate(-2deg) translateX(-1px);
+      }
+      30% {
+        transform: rotate(1.5deg) translateX(0.5px);
+      }
+      40% {
+        transform: rotate(-1.5deg) translateX(-0.5px);
+      }
+      50% {
+        transform: rotate(1deg) translateX(0.3px);
+      }
+      60% {
+        transform: rotate(-0.8deg) translateX(-0.3px);
+      }
+      70% {
+        transform: rotate(0.5deg) translateX(0.2px);
+      }
+      80% {
+        transform: rotate(-0.3deg) translateX(-0.1px);
+      }
+      90% {
+        transform: rotate(0.2deg) translateX(0);
+      }
+    }
+
+    /* For better accessibility and touch targets, ensure button is always tappable */
+    @media (max-width: 580px) {
+      .wa-button {
+        width: 60px;
+        height: 60px;
+      }
+      .wa-icon {
+        width: 34px;
+        height: 34px;
+      }
+      .whatsapp-sticky {
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+
+    /* Optional: tooltip / badge for extra style */
+    .wa-tooltip {
+      position: absolute;
+      right: 80px;
+      bottom: 18px;
+      background: #1f2e3a;
+      color: white;
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: 40px;
+      white-space: nowrap;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      font-family: monospace;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .whatsapp-sticky:hover .wa-tooltip {
+      opacity: 1;
+    }
+
+    /* For accessibility: focus ring */
+    .wa-button:focus-visible {
+      outline: 3px solid #ffdd77;
+      outline-offset: 3px;
+      border-radius: 50%;
+    }
+        
     </style>
 </head>
 <body class="font-inter text-white">
@@ -486,7 +660,22 @@
             <div id="modal-content"></div>
         </div>
     </div>
-    
+
+                                <div class="whatsapp-sticky">
+  <a href="https://wa.me/0305589967?text=Hello%21%20I%20need%20more%20information%20about%20your%20services.%20%F0%9F%99%82" 
+     class="wa-button" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     aria-label="Chat with us on WhatsApp">
+    <!-- WhatsApp vector icon (clean, scalable) -->
+    <svg class="wa-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.798 2 2.56 6.238 2.558 11.448c0 1.67.436 3.302 1.266 4.742L2 22l5.893-1.548a9.428 9.428 0 0 0 4.51 1.148h.004c5.208 0 9.447-4.238 9.449-9.448a9.387 9.387 0 0 0-2.779-6.724zM12.006 20.289h-.003a7.835 7.835 0 0 1-3.993-1.09l-.286-.17-3.5.918.934-3.41-.186-.296a7.83 7.83 0 0 1-1.2-4.182c0-4.317 3.514-7.832 7.83-7.832 2.09 0 4.056.814 5.534 2.292a7.788 7.788 0 0 1 2.293 5.537c-.002 4.317-3.516 7.832-7.832 7.832zM17.23 14.466c-.296-.148-1.752-.864-2.023-.963-.27-.099-.468-.148-.665.148-.197.296-.762.963-.934 1.16-.172.197-.344.222-.64.074-.296-.148-1.25-.46-2.38-1.467-.88-.785-1.474-1.754-1.647-2.05-.172-.297-.018-.457.13-.605.13-.13.296-.345.444-.518.148-.173.197-.296.296-.494.099-.197.05-.37-.025-.518-.074-.148-.665-1.602-.912-2.194-.24-.574-.484-.497-.665-.506-.171-.01-.369-.01-.566-.01a1.09 1.09 0 0 0-.79.37c-.272.296-1.04 1.016-1.04 2.477 0 1.461 1.064 2.872 1.212 3.07.148.198 2.094 3.196 5.072 4.481.708.306 1.26.489 1.691.626.71.226 1.357.194 1.869.118.57-.085 1.752-.716 2-1.407.247-.69.247-1.282.173-1.405-.074-.123-.271-.197-.567-.345z" fill="white"/>
+    </svg>
+    <!-- Optional tooltip on hover -->
+    <span class="wa-tooltip">Chat on WhatsApp 💬</span>
+  </a>
+</div>
+                            
       <!-- Footer -->
 <footer class="bg-space-blue border-t border-medium-gray/30 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
