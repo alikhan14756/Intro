@@ -445,6 +445,86 @@
       outline-offset: 3px;
       border-radius: 50%;
     }
+
+        /* ====================== SWITCH TOGGLE CSS (Light + Dark Mode) ====================== */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 62px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #334155;
+    transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 9999px;
+    border: 2px solid var(--accent-cyan);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 3px;
+    bottom: 3px;
+    background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+    transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+}
+
+input:checked + .slider {
+    background-color: #e2e8f0;
+    border-color: #0284c8;
+}
+
+input:checked + .slider:before {
+    transform: translateX(28px);
+    background: linear-gradient(135deg, #0284c8, #7c3aed);
+    box-shadow: 0 0 12px rgba(2, 132, 200, 0.6);
+}
+
+/* Moon & Sun inside switch */
+.slider::after {
+    content: '🌙';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    transition: .4s;
+    color: #fff;
+}
+
+input:checked + .slider::after {
+    content: '☀️';
+    left: auto;
+    right: 10px;
+}
+
+/* Light mode adjustment */
+.light .slider {
+    border-color: #64748b;
+}
         
     </style>
 </head>
@@ -471,6 +551,14 @@
                 <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+
+                        <!-- SWITCH TOGGLE HTML -->
+<div class="theme-switch-wrapper">
+    <label class="theme-switch">
+        <input type="checkbox" id="theme-switch-input">
+        <span class="slider"></span>
+    </label>
+</div>
                     </svg>
                 </button>
             </div>
@@ -714,6 +802,43 @@
     </footer>
     
     <script>
+
+    // ==================== SWITCH TOGGLE JS ====================
+    const switchInput = document.getElementById('theme-switch-input');
+    const html = document.documentElement;
+
+    function setTheme(isLight) {
+        if (isLight) {
+            html.classList.add('light');
+            switchInput.checked = true;
+        } else {
+            html.classList.remove('light');
+            switchInput.checked = false;
+        }
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+
+    function loadTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') setTheme(true);
+        else if (saved === 'dark') setTheme(false);
+        else setTheme(false); // default = your neon dark mode
+    }
+
+    // Toggle on click
+    switchInput.addEventListener('change', () => {
+        setTheme(switchInput.checked);
+    });
+
+    // Mobile menu (keep your existing one)
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Load on start
+    window.addEventListener('load', loadTheme);
+    // ========================================================
+        
         (function() {
             // Typed.js initialization
             if (typeof Typed !== 'undefined') {
