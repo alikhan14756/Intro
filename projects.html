@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Muhammad Ali</title>
     <meta name="description" content="Explore Muhammad Ali's portfolio projects including QR Code Generator, Calculator App, Quiz Application, and more web development projects.">
-    
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+
     <!-- Core Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -36,54 +37,93 @@
             }
         }
     </script>
-    
+
     <style>
+        :root {
+            color-scheme: dark;
+        }
+        
+        :root.light {
+            color-scheme: light;
+        }
+
         body {
             background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
-        
+
+        :root.light body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: #1a202c;
+        }
+
         .neon-glow {
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
-        
+
         .gradient-text {
             background: linear-gradient(45deg, #00d4ff, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
+        :root.light .gradient-text {
+            background: linear-gradient(45deg, #0284c8, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .card-hover {
             transition: all 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-10px) rotateX(5deg);
             box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
         }
-        
+
+        :root.light .card-hover:hover {
+            box-shadow: 0 20px 40px rgba(2, 132, 200, 0.2);
+        }
+
         .filter-btn {
             transition: all 0.3s ease;
         }
-        
+
         .filter-btn.active {
             background: linear-gradient(45deg, #00d4ff, #8b5cf6);
             color: white;
         }
-        
+
+        :root.light .filter-btn {
+            border-color: #0284c8;
+            color: #0284c8;
+        }
+
+        :root.light .filter-btn:hover {
+            background: #0284c8;
+            color: white;
+        }
+
+        :root.light .filter-btn.active {
+            background: linear-gradient(45deg, #0284c8, #7c3aed);
+        }
+
         .project-card {
             opacity: 1;
             transform: scale(1);
             transition: all 0.5s ease;
         }
-        
+
         .project-card.hidden {
             opacity: 0;
             transform: scale(0.8);
             pointer-events: none;
         }
-        
+
         .modal {
             display: none;
             position: fixed;
@@ -94,7 +134,11 @@
             background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
         }
-        
+
+        :root.light .modal {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
         .modal.show {
             display: flex;
             align-items: center;
@@ -176,6 +220,12 @@
             gap: 4px;
         }
 
+        :root.light .tech-badge-cyan {
+            background: rgba(2, 132, 200, 0.1);
+            color: #0284c8;
+            border-color: rgba(2, 132, 200, 0.3);
+        }
+
         .tech-badge-purple {
             background: rgba(139, 92, 246, 0.15);
             color: #8b5cf6;
@@ -188,6 +238,12 @@
             gap: 4px;
         }
 
+        :root.light .tech-badge-purple {
+            background: rgba(124, 58, 237, 0.1);
+            color: #7c3aed;
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+
         .section-header-cyan {
             font-family: 'Orbitron', monospace;
             font-size: 1.05rem;
@@ -197,6 +253,10 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        :root.light .section-header-cyan {
+            color: #0284c8;
         }
 
         .section-header-cyan svg,
@@ -214,12 +274,16 @@
             align-items: center;
             gap: 8px;
         }
-        
+
+        :root.light .section-header-purple {
+            color: #7c3aed;
+        }
+
         .nav-link {
             position: relative;
             overflow: hidden;
         }
-        
+
         .nav-link::before {
             content: '';
             position: absolute;
@@ -230,203 +294,363 @@
             background: linear-gradient(90deg, #00d4ff, #8b5cf6);
             transition: left 0.3s ease;
         }
-        
+
         .nav-link:hover::before {
             left: 0;
         }
 
-        
-         .whatsapp-sticky {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 9999;
-      width: auto;
-      height: auto;
-      cursor: pointer;
-      /* ensures smooth animations and no layout shifts */
-      display: block;
-      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.15));
-      transition: transform 0.2s ease, filter 0.2s;
-    }
+        /* ====================== THEME TOGGLE CSS ====================== */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    /* The actual clickable link/button element */
-    .wa-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 68px;
-      height: 68px;
-      background: #25D366;  /* WhatsApp brand green */
-      background: radial-gradient(circle at 30% 25%, #4cda6c, #1da859);
-      border-radius: 50%;   /* perfectly rounded shape */
-      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      /* Glow animation (pulse) – infinite */
-      animation: glowPulse 1.8s infinite ease-out;
-      /* Shake animation: runs every 1 second, but we set a repeating pattern with delay */
-      /* We'll create a separate shake keyframe that loops infinitely with step timing */
-      animation: 
-        glowPulse 2s infinite ease-out,
-        subtleShake 1s infinite ease-in-out;
-      transform-origin: center;
-      will-change: transform, box-shadow;
-    }
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 32px;
+        }
 
-    /* WhatsApp icon inside (SVG or Font Awesome? We'll use pure SVG for crispness & independence) */
-    .wa-icon {
-      width: 38px;
-      height: 38px;
-      display: block;
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
-      transition: transform 0.2s;
-    }
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-    /* Hover effect: scale up slightly, more intense glow */
-    .wa-button:hover {
-      transform: scale(1.07);
-      animation: glowIntense 1.2s infinite ease-out, subtleShake 1s infinite ease-in-out;
-    }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #1e293b;
+            transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 9999px;
+            border: 2px solid #00d4ff;
+        }
 
-    /* Optional: active (click) feedback */
-    .wa-button:active {
-      transform: scale(0.96);
-      transition: transform 0.05s;
-    }
+        :root.light .slider {
+            background-color: #e2e8f0;
+            border-color: #f59e0b;
+        }
 
-    /* KEYFRAME ANIMATIONS */
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 3px;
+            bottom: 3px;
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+        }
 
-    /* Glow pulse effect: from soft outer glow to bright pulsation */
-    @keyframes glowPulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5), 0 4px 12px rgba(0,0,0,0.2);
-      }
-      50% {
-        box-shadow: 0 0 0 12px rgba(37, 211, 102, 0.25), 0 6px 16px rgba(0,0,0,0.2);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 4px 12px rgba(0,0,0,0.2);
-      }
-    }
+        :root.light .slider:before {
+            transform: translateX(28px);
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+        }
 
-    /* More intense glow for hover */
-    @keyframes glowIntense {
-      0% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.8), 0 0 0 0 #fff3;
-      }
-      50% {
-        box-shadow: 0 0 0 16px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(255,255,200,0.3);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 0 0 0 rgba(255,255,200,0);
-      }
-    }
+        input:checked + .slider {
+            background-color: #e2e8f0;
+            border-color: #f59e0b;
+        }
 
-    /* Shake animation: gentle rotation & tiny translation, runs every 1 second (infinite) */
-    /* We want the shake to happen after every second. Since it's infinite, the animation repeats each 1s.
-       The keyframes define the shaking motion within the 1s duration. */
-    @keyframes subtleShake {
-      0%, 100% {
-        transform: rotate(0deg) translateX(0);
-      }
-      10% {
-        transform: rotate(2deg) translateX(1px);
-      }
-      20% {
-        transform: rotate(-2deg) translateX(-1px);
-      }
-      30% {
-        transform: rotate(1.5deg) translateX(0.5px);
-      }
-      40% {
-        transform: rotate(-1.5deg) translateX(-0.5px);
-      }
-      50% {
-        transform: rotate(1deg) translateX(0.3px);
-      }
-      60% {
-        transform: rotate(-0.8deg) translateX(-0.3px);
-      }
-      70% {
-        transform: rotate(0.5deg) translateX(0.2px);
-      }
-      80% {
-        transform: rotate(-0.3deg) translateX(-0.1px);
-      }
-      90% {
-        transform: rotate(0.2deg) translateX(0);
-      }
-    }
+        input:checked + .slider:before {
+            transform: translateX(28px);
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+        }
 
-    /* For better accessibility and touch targets, ensure button is always tappable */
-    @media (max-width: 580px) {
-      .wa-button {
-        width: 60px;
-        height: 60px;
-      }
-      .wa-icon {
-        width: 34px;
-        height: 34px;
-      }
-      .whatsapp-sticky {
-        bottom: 20px;
-        right: 20px;
-      }
-    }
+        /* Moon & Sun icons */
+        .slider::after {
+            content: '🌙';
+            position: absolute;
+            top: 50%;
+            left: 8px;
+            transform: translateY(-50%);
+            font-size: 14px;
+            transition: .4s;
+            opacity: 1;
+        }
 
-    /* Optional: tooltip / badge for extra style */
-    .wa-tooltip {
-      position: absolute;
-      right: 80px;
-      bottom: 18px;
-      background: #1f2e3a;
-      color: white;
-      font-size: 0.75rem;
-      padding: 6px 12px;
-      border-radius: 40px;
-      white-space: nowrap;
-      font-weight: 500;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      font-family: monospace;
-      letter-spacing: 0.3px;
-      backdrop-filter: blur(8px);
-      background: rgba(0, 0, 0, 0.7);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+        input:checked + .slider::after {
+            content: '☀️';
+            left: auto;
+            right: 8px;
+        }
 
-    .whatsapp-sticky:hover .wa-tooltip {
-      opacity: 1;
-    }
+        /* Light mode specific adjustments */
+        :root.light {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-color: #e2e8f0;
+        }
 
-    /* For accessibility: focus ring */
-    .wa-button:focus-visible {
-      outline: 3px solid #ffdd77;
-      outline-offset: 3px;
-      border-radius: 50%;
-    }
-        
+        :root.light .bg-space-blue\/80 {
+            background-color: rgba(248, 250, 252, 0.95) !important;
+        }
+
+        :root.light .bg-dark-gray {
+            background-color: #f1f5f9 !important;
+            border-color: #e2e8f0 !important;
+        }
+
+        :root.light .bg-medium-gray\/30 {
+            background-color: #e2e8f0 !important;
+        }
+
+        :root.light .text-white {
+            color: #0f172a !important;
+        }
+
+        :root.light .text-gray-300 {
+            color: #475569 !important;
+        }
+
+        :root.light .text-gray-400 {
+            color: #64748b !important;
+        }
+
+        :root.light .text-gray-500 {
+            color: #94a3b8 !important;
+        }
+
+        :root.light .text-electric-cyan {
+            color: #0284c8 !important;
+        }
+
+        :root.light .border-electric-cyan\/20 {
+            border-color: rgba(2, 132, 200, 0.2) !important;
+        }
+
+        :root.light .border-medium-gray\/30 {
+            border-color: rgba(226, 232, 240, 0.5) !important;
+        }
+
+        :root.light .from-electric-cyan {
+            --tw-gradient-from: #0284c8 var(--tw-gradient-from-position);
+        }
+
+        :root.light .to-neon-purple {
+            --tw-gradient-to: #7c3aed var(--tw-gradient-to-position);
+        }
+
+        :root.light #mobile-menu {
+            background-color: rgba(248, 250, 252, 0.98) !important;
+        }
+
+        /* WhatsApp Sticky Styles */
+        .whatsapp-sticky {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            width: auto;
+            height: auto;
+            cursor: pointer;
+            display: block;
+            filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.15));
+            transition: transform 0.2s ease, filter 0.2s;
+        }
+
+        .wa-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 68px;
+            height: 68px;
+            background: #25D366;
+            background: radial-gradient(circle at 30% 25%, #4cda6c, #1da859);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            animation: 
+                glowPulse 2s infinite ease-out,
+                subtleShake 1s infinite ease-in-out;
+            transform-origin: center;
+            will-change: transform, box-shadow;
+        }
+
+        .wa-icon {
+            width: 38px;
+            height: 38px;
+            display: block;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+            transition: transform 0.2s;
+        }
+
+        .wa-button:hover {
+            transform: scale(1.07);
+            animation: glowIntense 1.2s infinite ease-out, subtleShake 1s infinite ease-in-out;
+        }
+
+        .wa-button:active {
+            transform: scale(0.96);
+            transition: transform 0.05s;
+        }
+
+        @keyframes glowPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5), 0 4px 12px rgba(0,0,0,0.2);
+            }
+            50% {
+                box-shadow: 0 0 0 12px rgba(37, 211, 102, 0.25), 0 6px 16px rgba(0,0,0,0.2);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 4px 12px rgba(0,0,0,0.2);
+            }
+        }
+
+        @keyframes glowIntense {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.8), 0 0 0 0 #fff3;
+            }
+            50% {
+                box-shadow: 0 0 0 16px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(255,255,200,0.3);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 0 0 0 rgba(255,255,200,0);
+            }
+        }
+
+        @keyframes subtleShake {
+            0%, 100% {
+                transform: rotate(0deg) translateX(0);
+            }
+            10% {
+                transform: rotate(2deg) translateX(1px);
+            }
+            20% {
+                transform: rotate(-2deg) translateX(-1px);
+            }
+            30% {
+                transform: rotate(1.5deg) translateX(0.5px);
+            }
+            40% {
+                transform: rotate(-1.5deg) translateX(-0.5px);
+            }
+            50% {
+                transform: rotate(1deg) translateX(0.3px);
+            }
+            60% {
+                transform: rotate(-0.8deg) translateX(-0.3px);
+            }
+            70% {
+                transform: rotate(0.5deg) translateX(0.2px);
+            }
+            80% {
+                transform: rotate(-0.3deg) translateX(-0.1px);
+            }
+            90% {
+                transform: rotate(0.2deg) translateX(0);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .wa-button {
+                width: 60px;
+                height: 60px;
+            }
+            .wa-icon {
+                width: 34px;
+                height: 34px;
+            }
+            .whatsapp-sticky {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        .wa-tooltip {
+            position: absolute;
+            right: 80px;
+            bottom: 18px;
+            background: #1f2e3a;
+            color: white;
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            border-radius: 40px;
+            white-space: nowrap;
+            font-weight: 500;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            font-family: monospace;
+            letter-spacing: 0.3px;
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        :root.light .wa-tooltip {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a202c;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .whatsapp-sticky:hover .wa-tooltip {
+            opacity: 1;
+        }
+
+        .wa-button:focus-visible {
+            outline: 3px solid #ffdd77;
+            outline-offset: 3px;
+            border-radius: 50%;
+        }
+
+        /* Prevent FOUC */
+        html {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
-<body class="font-inter text-white">
-    
+<body class="font-inter text-white transition-colors duration-300">
+
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-space-blue/80 backdrop-blur-md border-b border-electric-cyan/20">
+    <nav class="fixed top-0 w-full z-50 bg-space-blue/80 backdrop-blur-md border-b border-electric-cyan/20 transition-colors duration-300" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="font-orbitron text-xl font-bold gradient-text">
                     <a href="index.html">Muhammad Ali</a>
                 </div>
-                <div class="hidden md:flex space-x-8">
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="nav-link text-white hover:text-electric-cyan transition-colors">Home</a>
                     <a href="projects.html" class="nav-link text-electric-cyan font-semibold">Projects</a>
                     <a href="skills.html" class="nav-link text-white hover:text-electric-cyan transition-colors">Skills</a>
                     <a href="about.html" class="nav-link text-white hover:text-electric-cyan transition-colors">About</a>
+                    
+                    <!-- Desktop Theme Toggle -->
+                    <div class="theme-switch-wrapper ml-4">
+                        <label class="theme-switch" for="theme-switch-input" title="Toggle Dark/Light Mode">
+                            <input type="checkbox" id="theme-switch-input" aria-label="Toggle dark mode">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-white hover:text-electric-cyan">
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center gap-4 md:hidden">
+                    <!-- Mobile Theme Toggle -->
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="mobile-theme-switch" title="Toggle Dark/Light Mode">
+                            <input type="checkbox" id="mobile-theme-switch" aria-label="Toggle dark mode">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <button id="mobile-menu-btn" class="text-white hover:text-electric-cyan p-2 focus:outline-none focus:ring-2 focus:ring-electric-cyan rounded-lg" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -434,9 +658,9 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-space-blue/95 backdrop-blur-md">
+        <div id="mobile-menu" class="hidden md:hidden bg-space-blue/95 backdrop-blur-md transition-colors duration-300" aria-label="Mobile navigation">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="index.html" class="block px-3 py-2 text-white hover:text-electric-cyan transition-colors">Home</a>
                 <a href="projects.html" class="block px-3 py-2 text-electric-cyan font-semibold">Projects</a>
@@ -445,7 +669,7 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Header Section -->
     <section class="pt-24 pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -458,274 +682,351 @@
             </p>
         </div>
     </section>
-    
+
     <!-- Filter Buttons -->
     <section class="pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
-                <button class="filter-btn active px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white" data-filter="all">
+                <button class="filter-btn active px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white transition-all" data-filter="all">
                     All Projects
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white" data-filter="html-css">
+                <button class="filter-btn px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white transition-all" data-filter="html-css">
                     HTML/CSS
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white" data-filter="javascript">
+                <button class="filter-btn px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white transition-all" data-filter="javascript">
                     JavaScript
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white" data-filter="react">
+                <button class="filter-btn px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white transition-all" data-filter="react">
                     React/Next.js
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white" data-filter="animation">
+                <button class="filter-btn px-6 py-2 rounded-full border border-electric-cyan text-electric-cyan hover:bg-electric-cyan hover:text-white transition-all" data-filter="animation">
                     Animation
                 </button>
             </div>
         </div>
     </section>
-    
+
     <!-- Projects Grid -->
     <section class="pb-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
+
                 <!-- Project 1: QR Code Generator -->
-                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30" data-category="javascript">
+                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30 transition-colors duration-300" data-category="javascript">
                     <div class="h-48 bg-gradient-to-br from-electric-cyan/20 to-neon-purple/20 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                         <div class="text-6xl">📱</div>
                     </div>
                     <h3 class="font-orbitron text-xl font-bold mb-2 text-electric-cyan">QR Code Generator</h3>
                     <p class="text-gray-300 mb-4">Dynamic QR code generator with custom styling options, multiple export formats, and real-time preview functionality.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <a href="https://github.com/alikhan14756/QR-Code/blob/main/index.html" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">HTML</a>
-                        <a href="https://github.com/alikhan14756/QR-Code/blob/main/Style.css" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">CSS</a>
-                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">JavaScript</span>
-                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">Canvas API</span>
+                        <a href="https://github.com/alikhan14756/QR-Code/blob/main/index.html" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">HTML</a>
+                        <a href="https://github.com/alikhan14756/QR-Code/blob/main/Style.css" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">CSS</a>
+                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">JavaScript</span>
+                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">Canvas API</span>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         <a href="https://alikhan14756.github.io/QR-Code/" target="_blank"
-                           class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all inline-block">
+                           class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all inline-block text-white">
                             Live Demo
                         </a>
                         <a href="https://github.com/alikhan14756/QR-Code/" target="_blank"
-                           class="border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all inline-block">
+                           class="border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all inline-block text-white">
                             View Code
                         </a>
-                        <button class="project-details border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all"
+                        <button class="project-details border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all text-white"
                                 data-project="qr-generator">
                             Details
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- Project 2: Calculator App -->
-                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30" data-category="javascript">
+                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30 transition-colors duration-300" data-category="javascript">
                     <div class="h-48 bg-gradient-to-br from-neon-purple/20 to-electric-cyan/20 rounded-lg mb-4 flex items-center justify-center">
                         <div class="text-6xl">🧮</div>
                     </div>
                     <h3 class="font-orbitron text-xl font-bold mb-2 text-neon-purple">Calculator Web App</h3>
                     <p class="text-gray-300 mb-4">Advanced calculator with scientific functions, memory storage, history tracking, and responsive design for all devices.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <a href="https://github.com/alikhan14756/Calculator-App/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">HTML</a>
-                        <a href="https://github.com/alikhan14756/Calculator-App/blob/main/style.css" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">CSS</a>
-                        <a href="https://github.com/alikhan14756/Calculator-App/blob/main/script.js" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">JavaScript</a>
-                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">Math.js</span>
+                        <a href="https://github.com/alikhan14756/Calculator-App/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">HTML</a>
+                        <a href="https://github.com/alikhan14756/Calculator-App/blob/main/style.css" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">CSS</a>
+                        <a href="https://github.com/alikhan14756/Calculator-App/blob/main/script.js" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">JavaScript</a>
+                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">Math.js</span>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <a href="https://alikhan14756.github.io/Calculator-App/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all">
+                        <a href="https://alikhan14756.github.io/Calculator-App/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all text-white">
                             Live Demo
                         </a>
-                        <a href="https://github.com/alikhan14756/Calculator-App/" class="border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all">
+                        <a href="https://github.com/alikhan14756/Calculator-App/" class="border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all text-white">
                             View Code
                         </a>
-                        <button class="project-details border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all" data-project="calculator">
+                        <button class="project-details border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all text-white" data-project="calculator">
                             Details
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- Project 3: Quiz App -->
-                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30" data-category="javascript">
+                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30 transition-colors duration-300" data-category="javascript">
                     <div class="h-48 bg-gradient-to-br from-electric-cyan/20 to-neon-purple/20 rounded-lg mb-4 flex items-center justify-center">
                         <div class="text-6xl">🎯</div>
                     </div>
                     <h3 class="font-orbitron text-xl font-bold mb-2 text-electric-cyan">Quiz Application</h3>
                     <p class="text-gray-300 mb-4">Interactive quiz app with multiple categories, timer functionality, scoring system, and detailed results analysis.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <a href="https://github.com/alikhan14756/Quiz-App/blob/main/index.html" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">HTML</a>
-                        <a href="https://github.com/alikhan14756/Quiz-App/blob/main/style.css" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">CSS</a>
-                        <a href="https://github.com/alikhan14756/Quiz-App/blob/main/script.js" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">JavaScript</a>
-                        <a  class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">Local Storage</a>
+                        <a href="https://github.com/alikhan14756/Quiz-App/blob/main/index.html" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">HTML</a>
+                        <a href="https://github.com/alikhan14756/Quiz-App/blob/main/style.css" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">CSS</a>
+                        <a href="https://github.com/alikhan14756/Quiz-App/blob/main/script.js" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">JavaScript</a>
+                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">Local Storage</span>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <a href="https://alikhan14756.github.io/Quiz-App/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all">
+                        <a href="https://alikhan14756.github.io/Quiz-App/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all text-white">
                             Live Demo
                         </a>
-                        <a href="https://github.com/alikhan14756/Quiz-App" class="border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all">
+                        <a href="https://github.com/alikhan14756/Quiz-App" class="border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all text-white">
                             View Code
                         </a>
-                        <button class="project-details border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all" data-project="quiz-app">
+                        <button class="project-details border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all text-white" data-project="quiz-app">
                             Details
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- Project 4: Portfolio Website -->
-                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30" data-category="html-css">
+                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30 transition-colors duration-300" data-category="html-css">
                     <div class="h-48 bg-gradient-to-br from-neon-purple/20 to-electric-cyan/20 rounded-lg mb-4 flex items-center justify-center">
                         <div class="text-6xl">💼</div>
                     </div>
                     <h3 class="font-orbitron text-xl font-bold mb-2 text-neon-purple">Portfolio Website</h3>
                     <p class="text-gray-300 mb-4">Personal portfolio website with modern design, smooth animations, and responsive layout showcasing my skills and projects.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <a href="https://github.com/alikhan14756/Intro/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">HTML</a>
-                        <a  href="https://github.com/alikhan14756/Intro/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">CSS</a>
-                        <a  href="https://github.com/alikhan14756/Intro/blob/main/main.js" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">JavaScript</a>
-                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">Responsive</span>
+                        <a href="https://github.com/alikhan14756/Intro/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">HTML</a>
+                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">CSS</span>
+                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">JavaScript</span>
+                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">Responsive</span>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <a href="https://alikhan14756.github.io/Intro/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all">
+                        <a href="https://alikhan14756.github.io/Intro/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all text-white">
                             Live Demo
                         </a>
-                        <a href="https://github.com/alikhan14756/Intro/" class="border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all">
+                        <a href="https://github.com/alikhan14756/Intro/" class="border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all text-white">
                             View Code
                         </a>
-                        <button class="project-details border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all" data-project="portfolio">
+                        <button class="project-details border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all text-white" data-project="portfolio">
                             Details
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- Project 5: 3D Image Rotation -->
-                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30" data-category="animation">
+                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30 transition-colors duration-300" data-category="animation">
                     <div class="h-48 bg-gradient-to-br from-electric-cyan/20 to-neon-purple/20 rounded-lg mb-4 flex items-center justify-center">
                         <div class="text-6xl">🔄</div>
                     </div>
                     <h3 class="font-orbitron text-xl font-bold mb-2 text-electric-cyan">3D Image Rotation</h3>
                     <p class="text-gray-300 mb-4">Interactive 3D image gallery with smooth rotation effects, multiple viewing angles, and touch/swipe support for mobile devices.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <a href="https://github.com/alikhan14756/Animation/blob/main/index.html" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">HTML</a>
-                        <a href="https://github.com/alikhan14756/Animation/blob/main/index.html" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">CSS</a>
-                        <a href="https://github.com/alikhan14756/Animation/blob/main/index.html" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">JavaScript</a>
-                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm">CSS 3D</span>
+                        <a href="https://github.com/alikhan14756/Animation/blob/main/index.html" class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">HTML</a>
+                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">CSS</span>
+                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">JavaScript</span>
+                        <span class="bg-electric-cyan/20 text-electric-cyan px-2 py-1 rounded text-sm transition-colors">CSS 3D</span>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <a href="https://alikhan14756.github.io/Animation/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all">
+                        <a href="https://alikhan14756.github.io/Animation/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all text-white">
                             Live Demo
                         </a>
-                        <a href="https://github.com/alikhan14756/Animation/" class="border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all">
+                        <a href="https://github.com/alikhan14756/Animation/" class="border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all text-white">
                             View Code
                         </a>
-                        <button class="project-details border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all" data-project="3d-rotation">
+                        <button class="project-details border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all text-white" data-project="3d-rotation">
                             Details
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- Project 6: Bouncing Ball Animation -->
-                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30" data-category="animation">
+                <div class="project-card card-hover bg-dark-gray rounded-lg p-6 border border-medium-gray/30 transition-colors duration-300" data-category="animation">
                     <div class="h-48 bg-gradient-to-br from-neon-purple/20 to-electric-cyan/20 rounded-lg mb-4 flex items-center justify-center">
                         <div class="text-6xl">⚽</div>
                     </div>
                     <h3 class="font-orbitron text-xl font-bold mb-2 text-neon-purple">Bouncing Ball Animation</h3>
                     <p class="text-gray-300 mb-4">Physics-based bouncing ball animation with realistic gravity effects, collision detection, and interactive controls.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <a href="https://github.com/alikhan14756/Ball-Bounce/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">HTML</span>
-                        <a href="https://github.com/alikhan14756/Ball-Bounce/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">CSS</span>
-                        <a href="https://github.com/alikhan14756/Ball-Bounce/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">JavaScript</span>
-                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm">Canvas API</span>
+                        <a href="https://github.com/alikhan14756/Ball-Bounce/blob/main/index.html" class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">HTML</span>
+                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">CSS</span>
+                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">JavaScript</span>
+                        <span class="bg-neon-purple/20 text-neon-purple px-2 py-1 rounded text-sm transition-colors">Canvas API</span>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <a href="https://alikhan14756.github.io/Ball-Bounce/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all">
+                        <a href="https://alikhan14756.github.io/Ball-Bounce/" class="bg-gradient-to-r from-electric-cyan to-neon-purple px-4 py-2 rounded text-sm font-semibold hover:neon-glow transition-all text-white">
                             Live Demo
                         </a>
-                        <a href="https://github.com/alikhan14756/Ball-Bounce/" class="border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all">
+                        <a href="https://github.com/alikhan14756/Ball-Bounce/" class="border border-neon-purple px-4 py-2 rounded text-sm font-semibold hover:bg-neon-purple/10 transition-all text-white">
                             View Code
                         </a>
-                        <button class="project-details border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all" data-project="bouncing-ball">
+                        <button class="project-details border border-electric-cyan px-4 py-2 rounded text-sm font-semibold hover:bg-electric-cyan/10 transition-all text-white" data-project="bouncing-ball">
                             Details
                         </button>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
-    
+
     <!-- Project Detail Modal -->
     <div id="project-modal" class="modal">
-        <div class="bg-dark-gray rounded-lg p-8 max-w-2xl mx-4 border border-medium-gray/30 max-h-[90vh] overflow-y-auto">
+        <div class="bg-dark-gray rounded-lg p-8 max-w-2xl mx-4 border border-medium-gray/30 max-h-[90vh] overflow-y-auto transition-colors duration-300">
             <div class="flex justify-between items-center mb-6">
                 <h2 id="modal-title" class="font-orbitron text-2xl font-bold gradient-text"></h2>
-                <button id="close-modal" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+                <button id="close-modal" class="text-gray-400 hover:text-white text-2xl leading-none transition-colors">&times;</button>
             </div>
             <div id="modal-content"></div>
         </div>
     </div>
 
-                                <div class="whatsapp-sticky">
-  <a href="https://wa.me/0305589967?text=Hello%21%20I%20need%20more%20information%20about%20your%20services.%20%F0%9F%99%82" 
-     class="wa-button" 
-     target="_blank" 
-     rel="noopener noreferrer"
-     aria-label="Chat with us on WhatsApp">
-    <!-- WhatsApp vector icon (clean, scalable) -->
-    <svg class="wa-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.798 2 2.56 6.238 2.558 11.448c0 1.67.436 3.302 1.266 4.742L2 22l5.893-1.548a9.428 9.428 0 0 0 4.51 1.148h.004c5.208 0 9.447-4.238 9.449-9.448a9.387 9.387 0 0 0-2.779-6.724zM12.006 20.289h-.003a7.835 7.835 0 0 1-3.993-1.09l-.286-.17-3.5.918.934-3.41-.186-.296a7.83 7.83 0 0 1-1.2-4.182c0-4.317 3.514-7.832 7.83-7.832 2.09 0 4.056.814 5.534 2.292a7.788 7.788 0 0 1 2.293 5.537c-.002 4.317-3.516 7.832-7.832 7.832zM17.23 14.466c-.296-.148-1.752-.864-2.023-.963-.27-.099-.468-.148-.665.148-.197.296-.762.963-.934 1.16-.172.197-.344.222-.64.074-.296-.148-1.25-.46-2.38-1.467-.88-.785-1.474-1.754-1.647-2.05-.172-.297-.018-.457.13-.605.13-.13.296-.345.444-.518.148-.173.197-.296.296-.494.099-.197.05-.37-.025-.518-.074-.148-.665-1.602-.912-2.194-.24-.574-.484-.497-.665-.506-.171-.01-.369-.01-.566-.01a1.09 1.09 0 0 0-.79.37c-.272.296-1.04 1.016-1.04 2.477 0 1.461 1.064 2.872 1.212 3.07.148.198 2.094 3.196 5.072 4.481.708.306 1.26.489 1.691.626.71.226 1.357.194 1.869.118.57-.085 1.752-.716 2-1.407.247-.69.247-1.282.173-1.405-.074-.123-.271-.197-.567-.345z" fill="white"/>
-    </svg>
-    <!-- Optional tooltip on hover -->
-    <span class="wa-tooltip">Chat on WhatsApp 💬</span>
-  </a>
-</div>
-                            
-      <!-- Footer -->
-<footer class="bg-space-blue border-t border-medium-gray/30 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-            <div class="font-orbitron text-xl font-bold gradient-text mb-4">
-                Muhammad Ali
-            </div>
-            <p class="text-gray-400 mb-4">
-                Front-End Developer & Gaming Enthusiast
-            </p>
-            <div class="flex justify-center space-x-6 mb-4">
-                <!-- X / Twitter -->
-                <a href="https://x.com/malikhan14756" class="text-gray-400 hover:text-electric-cyan transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                    </svg>
-                </a>
-                <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/in/m-ali-27954934b/" class="text-gray-400 hover:text-electric-cyan transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <!-- GitHub -->
-                <a href="https://github.com/alikhan14756" class="text-gray-400 hover:text-electric-cyan transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/m.ali.833155" class="text-gray-400 hover:text-electric-cyan transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M22.675 0h-21.35C.596 0 0 .593 0 1.326v21.348C0 23.407.596 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.794.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.324-.593 1.324-1.326V1.326C24 .593 23.406 0 22.675 0z"/>
-                    </svg>
-                </a>
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/alikhan1475623" class="text-gray-400 hover:text-electric-cyan transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.334 3.608 1.31.975.976 1.247 2.242 1.31 3.608.058 1.265.069 1.645.069 4.849s-.012 3.584-.07 4.849c-.062 1.366-.334 2.633-1.31 3.608-.976.975-2.242 1.247-3.608 1.31-1.265.058-1.645.069-4.849.069s-3.584-.012-4.849-.07c-1.366-.062-2.633-.334-3.608-1.31-.975-.976-1.247-2.242-1.31-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.334-2.633 1.31-3.608.976-.975 2.242-1.247 3.608-1.31C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.775.131 4.567.386 3.515 1.439c-1.053 1.053-1.308 2.261-1.367 3.538C2.013 6.668 2 7.077 2 10.337v3.326c0 3.26.013 3.669.072 4.949.059 1.277.314 2.485 1.367 3.538 1.052 1.053 2.26 1.308 3.538 1.367 1.28.059 1.689.072 4.949.072s3.669-.013 4.949-.072c1.277-.059 2.485-.314 3.538-1.367 1.053-1.052 1.308-2.26 1.367-3.538.059-1.28.072-1.689.072-4.949s-.013-3.669-.072-4.949c-.059-1.277-.314-2.485-1.367-3.538-1.052-1.053-2.26-1.308-3.538-1.367C15.669.013 15.26 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.881 0 1.44 1.44 0 012.881 0z"/>
-                    </svg>
-                </a>
-            </div>
-            <p class="text-gray-500 text-sm">
-                © 2024 Muhammad Ali. All rights reserved.
-            </p>
-        </div>
+    <!-- WhatsApp Sticky Button -->
+    <div class="whatsapp-sticky">
+        <a href="https://wa.me/+923055389967?text=Hello%21%20I%20need%20more%20information%20about%20your%20services.%20%F0%9F%99%82" 
+           class="wa-button" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           aria-label="Chat with us on WhatsApp">
+            <!-- WhatsApp vector icon -->
+            <svg class="wa-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.798 2 2.56 6.238 2.558 11.448c0 1.67.436 3.302 1.266 4.742L2 22l5.893-1.548a9.428 9.428 0 0 0 4.51 1.148h.004c5.208 0 9.447-4.238 9.449-9.448a9.387 9.387 0 0 0-2.779-6.724zM12.006 20.289h-.003a7.835 7.835 0 0 1-3.993-1.09l-.286-.17-3.5.918.934-3.41-.186-.296a7.83 7.83 0 0 1-1.2-4.182c0-4.317 3.514-7.832 7.83-7.832 2.09 0 4.056.814 5.534 2.292a7.788 7.788 0 0 1 2.293 5.537c-.002 4.317-3.516 7.832-7.832 7.832zM17.23 14.466c-.296-.148-1.752-.864-2.023-.963-.27-.099-.468-.148-.665.148-.197.296-.762.963-.934 1.16-.172.197-.344.222-.64.074-.296-.148-1.25-.46-2.38-1.467-.88-.785-1.474-1.754-1.647-2.05-.172-.297-.018-.457.13-.605.13-.13.296-.345.444-.518.148-.173.197-.296.296-.494.099-.197.05-.37-.025-.518-.074-.148-.665-1.602-.912-2.194-.24-.574-.484-.497-.665-.506-.171-.01-.369-.01-.566-.01a1.09 1.09 0 0 0-.79.37c-.272.296-1.04 1.016-1.04 2.477 0 1.461 1.064 2.872 1.212 3.07.148.198 2.094 3.196 5.072 4.481.708.306 1.26.489 1.691.626.71.226 1.357.194 1.869.118.57-.085 1.752-.716 2-1.407.247-.69.247-1.282.173-1.405-.074-.123-.271-.197-.567-.345z" fill="white"/>
+            </svg>
+            <span class="wa-tooltip">Chat on WhatsApp 💬</span>
+        </a>
     </div>
-</footer>
-    
+
+    <!-- Footer -->
+    <footer class="bg-space-blue border-t border-medium-gray/30 py-8 transition-colors duration-300" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-orbitron text-xl font-bold gradient-text mb-4">
+                    Muhammad Ali
+                </div>
+                <p class="text-gray-400 mb-4">
+                    Front-End Developer & Gaming Enthusiast
+                </p>
+                <div class="flex justify-center space-x-6 mb-4" aria-label="Social media links">
+                    <!-- X / Twitter -->
+                    <a href="https://x.com/malikhan14756" class="text-gray-400 hover:text-electric-cyan transition-colors" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/m-ali-27954934b/" class="text-gray-400 hover:text-electric-cyan transition-colors" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <!-- GitHub -->
+                    <a href="https://github.com/alikhan14756" class="text-gray-400 hover:text-electric-cyan transition-colors" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/m.ali.833155" class="text-gray-400 hover:text-electric-cyan transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M22.675 0h-21.35C.596 0 0 .593 0 1.326v21.348C0 23.407.596 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.794.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.324-.593 1.324-1.326V1.326C24 .593 23.406 0 22.675 0z"/>
+                        </svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/alikhan1475623" class="text-gray-400 hover:text-electric-cyan transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.334 3.608 1.31.975.976 1.247 2.242 1.31 3.608.058 1.265.069 1.645.069 4.849s-.012 3.584-.07 4.849c-.062 1.366-.334 2.633-1.31 3.608-.976.975-2.242 1.247-3.608 1.31-1.265.058-1.645.069-4.849.069s-3.584-.012-4.849-.07c-1.366-.062-2.633-.334-3.608-1.31-.975-.976-1.247-2.242-1.31-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.334-2.633 1.31-3.608.976-.975 2.242-1.247 3.608-1.31C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.775.131 4.567.386 3.515 1.439c-1.053 1.053-1.308 2.261-1.367 3.538C2.013 6.668 2 7.077 2 10.337v3.326c0 3.26.013 3.669.072 4.949.059 1.277.314 2.485 1.367 3.538 1.052 1.053 2.26 1.308 3.538 1.367 1.28.059 1.689.072 4.949.072s3.669-.013 4.949-.072c1.277-.059 2.485-.314 3.538-1.367 1.053-1.052 1.308-2.26 1.367-3.538.059-1.28.072-1.689.072-4.949s-.013-3.669-.072-4.949c-.059-1.277-.314-2.485-1.367-3.538-1.052-1.053-2.26-1.308-3.538-1.367C15.669.013 15.26 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.881 0 1.44 1.44 0 012.881 0z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    © 2024 Muhammad Ali. All rights reserved. | Front-End Developer from Pakistan.
+                </p>
+            </div>
+        </div>
+    </footer>
+
     <script>
+        // ═══════════════════════════════════════════════════════════════════════
+        //  THEME TOGGLE LOGIC
+        // ═══════════════════════════════════════════════════════════════════════
+        (function() {
+            const switchInput = document.getElementById('theme-switch-input');
+            const mobileSwitchInput = document.getElementById('mobile-theme-switch');
+            const html = document.documentElement;
+
+            function setTheme(isLight) {
+                if (isLight) {
+                    html.classList.add('light');
+                    html.classList.remove('dark');
+                    if (switchInput) switchInput.checked = true;
+                    if (mobileSwitchInput) mobileSwitchInput.checked = true;
+                } else {
+                    html.classList.remove('light');
+                    html.classList.add('dark');
+                    if (switchInput) switchInput.checked = false;
+                    if (mobileSwitchInput) mobileSwitchInput.checked = false;
+                }
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            }
+
+            function loadTheme() {
+                const saved = localStorage.getItem('theme');
+                
+                if (saved === 'light') {
+                    setTheme(true);
+                } else if (saved === 'dark') {
+                    setTheme(false);
+                } else {
+                    // Default to dark
+                    setTheme(false);
+                }
+            }
+
+            // Desktop toggle
+            if (switchInput) {
+                switchInput.addEventListener('change', () => {
+                    setTheme(switchInput.checked);
+                });
+            }
+
+            // Mobile toggle
+            if (mobileSwitchInput) {
+                mobileSwitchInput.addEventListener('change', () => {
+                    setTheme(mobileSwitchInput.checked);
+                });
+            }
+
+            // Listen for system changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    setTheme(!e.matches);
+                }
+            });
+
+            // Load theme immediately
+            loadTheme();
+        })();
+
+        // ═══════════════════════════════════════════════════════════════════════
+        //  MOBILE MENU LOGIC
+        // ═══════════════════════════════════════════════════════════════════════
+        (function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                    mobileMenuBtn.setAttribute('aria-expanded', !expanded);
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        })();
+
         // ─── SVG icon helpers (used inside modal innerHTML) ────────────────────────
         const iconCheck = (color) =>
             `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-top:3px;flex-shrink:0;">
@@ -995,7 +1296,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             initializeProjectFilters();
             initializeProjectModals();
-            initializeMobileMenu();
             initializeScrollAnimations();
         });
 
@@ -1058,15 +1358,6 @@
                 modal.classList.remove('show');
                 document.body.style.overflow = '';
             }
-        }
-
-        // Mobile menu
-        function initializeMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu    = document.getElementById('mobile-menu');
-            mobileMenuBtn?.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
         }
 
         // Scroll animations
